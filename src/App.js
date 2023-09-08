@@ -9,10 +9,17 @@ import Contact from './Contact';
 function App() {
   return (
     <>
-      <MyNavBar/>
-      <Home/>
-      <About/>
-      <Contact/>
+      <MyNavBar />
+      <section id='home'>
+        <Home />
+      </section>
+      <section id='about'>
+        <About />
+      </section>
+
+      <section id='contact'>
+        <Contact />
+      </section>
     </>
   );
 }

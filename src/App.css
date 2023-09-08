@@ -5,6 +5,17 @@
 .page{
     display: flex;
     height: 100vh;
+    flex-direction: row-reverse;
+    margin-top: 50px;
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* justify-content: space-evenly; */
+    /* justify-content: space-between; */
     justify-content: center;
     align-items: center;
+}
+
+.nlink{
+    text-decoration: none;
+    color: red;
 }
