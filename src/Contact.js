@@ -1,46 +1,68 @@
 import React, { useState } from 'react'
-import { Form, FormGroup, Button } from 'react-bootstrap'
+import { Button, Form } from 'react-bootstrap'
+
 
 const Contact = () => {
-
   const [fullName, setfullName] = useState("")
+  const [email, setemail] = useState("")
+  const [selectedCourses, setCourses] = useState([])
 
-  function onSubmit() {
+  function submitForm() {
     console.log(fullName)
+    if (selectedCourses.length == 0) {
+      alert('Please Select course')
+    } else {
+      console.log(selectedCourses)
+
+    }
+    console.log(email)
   }
+
+  function handleCourseChange(event) {
+    const { value, checked } = event.target
+    if (checked) {
+      setCourses([...selectedCourses, value])
+    } else {
+      setCourses((prev) => (
+        prev.filter((c) => c !== value)
+      ))
+    }
+  }
+
+
   return (
     <div className='page'>
       <Form>
-        <FormGroup>
+        <Form.Group>
           <Form.Label>Full Name</Form.Label>
-          <Form.Control type='text'
-            onChange={(e) => setfullName(e.target.value)}
-            placeholder='Enter Name'></Form.Control>
-        </FormGroup>
-        <FormGroup>
+          <Form.Control onChange={(e) => setfullName(e.target.value)} type='text' placeholder='Enter ' />
+        </Form.Group>
+
+        <Form.Group>
           <Form.Label>Email</Form.Label>
-          <Form.Control type='email' placeholder='Enter Email'></Form.Control>
-        </FormGroup>
+          <Form.Control onChange={(e) => setemail(e.target.value)} type='email' placeholder='Enter Email' />
+        </Form.Group>
 
-        <FormGroup>
+        <Form.Group>
           <Form.Label>Mobile No</Form.Label>
-          <Form.Control type='number' placeholder='Enter Mobile Nos'></Form.Control>
-        </FormGroup>
-        <FormGroup>
+          <Form.Control type='number' placeholder='Enter Mobile' />
+        </Form.Group>
+
+        <Form.Group>
           <Form.Label>Gender</Form.Label>
-          <Form.Check type='radio' name="gender" label="Male"></Form.Check>
-          <Form.Check type='radio' name="gender" label="FeMale"></Form.Check>
-        </FormGroup>
+          <Form.Check type='radio' name='gender' label="MALE" />
+          <Form.Check type='radio' name='gender' label="FEMALE" />
+        </Form.Group>
 
-        <FormGroup>
-          <Form.Label>Course</Form.Label>
-          <Form.Check type='checkbox' name="course" label="MCA"></Form.Check>
-          <Form.Check type='checkbox' name="course" label="BCA"></Form.Check>
-        </FormGroup>
-        <Button onClick={() => onSubmit()}>Submit</Button>
-
+        <Form.Group>
+          <Form.Label>Courses</Form.Label>
+          <Form.Check onChange={(e) => handleCourseChange(e)} type='checkbox' name='course' value="MCA" label="MCA" />
+          <Form.Check onChange={(e) => handleCourseChange(e)} type='checkbox' name='course' value="BCA" label="BCA" />
+          <Form.Check onChange={(e) => handleCourseChange(e)} type='checkbox' name='courser' value="BSC" label="BSC" />
+          <Form.Check onChange={(e) => handleCourseChange(e)} type='checkbox' name='course' value="MSC" label="MSC" />
+        </Form.Group>
+        <Button onClick={() => submitForm()}>OK</Button>
       </Form>
-      {/* <h5>{fullName}</h5> */}
     </div>
   )
 }
