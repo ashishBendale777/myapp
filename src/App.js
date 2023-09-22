@@ -7,6 +7,7 @@ import About from './About';
 import Contact from './Contact';
 import MyNavRouter from './MyNavRouter';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import MyOffCanvas from './MyOffCanvas';
 
 function App() {
   return (
@@ -23,14 +24,16 @@ function App() {
         <Contact />
       </section>
      */}
-      <BrowserRouter>
+      {/* <BrowserRouter>
         <MyNavRouter />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<Contact />} />
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter> */}
+
+      <MyOffCanvas />
     </>
   );
 }
