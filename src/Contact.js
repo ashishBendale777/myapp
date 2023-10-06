@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 
@@ -5,6 +6,9 @@ import { Button, Form } from 'react-bootstrap'
 const Contact = () => {
   const [fullName, setfullName] = useState("")
   const [email, setemail] = useState("")
+  const [mobile, setmobile] = useState("")
+  const [gender, setgender] = useState("")
+
   const [selectedCourses, setCourses] = useState([])
 
   function submitForm() {
@@ -15,8 +19,24 @@ const Contact = () => {
       console.log(selectedCourses)
 
     }
-    console.log(email)
+    const userdata = {
+      UserName: fullName,
+      UserEmail: email,
+      UserMobile: mobile,
+      UserGender: gender
+    }
+    postData(userdata)
   }
+
+  const postData = (userData) => {
+    axios.post("http://localhost:5000/api/adduser", userData)
+      .then((result) => {
+        alert("USER SAVED")
+      }).catch((err) => {
+        alert('ERR')
+      });
+  }
+
 
   function handleCourseChange(event) {
     const { value, checked } = event.target
@@ -45,22 +65,29 @@ const Contact = () => {
 
         <Form.Group>
           <Form.Label>Mobile No</Form.Label>
-          <Form.Control type='number' placeholder='Enter Mobile' />
+          <Form.Control type='number'
+            onChange={(e) => setmobile(e.target.value)}
+            placeholder='Enter Mobile' />
         </Form.Group>
 
         <Form.Group>
           <Form.Label>Gender</Form.Label>
-          <Form.Check type='radio' name='gender' label="MALE" />
-          <Form.Check type='radio' name='gender' label="FEMALE" />
+          <Form.Check type='radio' value="M"
+            onChange={(e) => setgender(e.target.value)}
+            name='gender' label="MALE" />
+          <Form.Check type='radio' value="F"
+            onChange={(e) => setgender(e.target.value)}
+            name='gender' label="FEMALE" />
         </Form.Group>
 
-        <Form.Group>
+        {/* <Form.Group>
           <Form.Label>Courses</Form.Label>
           <Form.Check onChange={(e) => handleCourseChange(e)} type='checkbox' name='course' value="MCA" label="MCA" />
           <Form.Check onChange={(e) => handleCourseChange(e)} type='checkbox' name='course' value="BCA" label="BCA" />
           <Form.Check onChange={(e) => handleCourseChange(e)} type='checkbox' name='courser' value="BSC" label="BSC" />
           <Form.Check onChange={(e) => handleCourseChange(e)} type='checkbox' name='course' value="MSC" label="MSC" />
-        </Form.Group>
+        </Form.Group> */}
+
         <Button onClick={() => submitForm()}>OK</Button>
       </Form>
     </div>
