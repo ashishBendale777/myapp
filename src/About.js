@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Card, Col, Container, Row } from 'react-bootstrap'
+import { Button, Card, Col, Container, Row } from 'react-bootstrap'
 
 const About = () => {
 
@@ -17,6 +17,17 @@ const About = () => {
       });
   }, [])
 
+  const deleteUser = (userId) => {
+    axios.post('http://localhost:5000/api/deleteuser',
+      {
+        uid: userId
+      }).then((result) => {
+        alert("User Deleted")
+        window.location.reload(false)
+      }).catch((err) => {
+
+      });
+  }
 
   return (
     <div>
@@ -33,7 +44,11 @@ const About = () => {
                       <p>{user.UserMobile}</p>
                       <p>{user.UserGender}</p>
                       <p>{user.UserEmail}</p>
+                      <p>{user._id}</p>
                     </Card.Body>
+                    <Card.Footer>
+                      <Button onClick={() => deleteUser(user._id)}>Delete</Button>
+                    </Card.Footer>
                   </Card>
                 </Col>
               )
